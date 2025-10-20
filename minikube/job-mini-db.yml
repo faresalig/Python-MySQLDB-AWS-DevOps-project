@@ -8,8 +8,16 @@ spec:
     spec:
       containers:
       - name: db-init
-        image: triple3a/todo-db-img:latest
+        image: farespro/db-my:latest
         env:
+          # مطلوب من MySQL الرسمي
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: db-password
+
+          # بيئة الاتصال بالتطبيق
           - name: DB_HOST
             value: db-service
           - name: DB_USER

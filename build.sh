@@ -2,8 +2,8 @@
 
 # Variables
 cluster_name="cluster-1-test"
-region="REGION"
-aws_id="AWS_ID"
+region="us-east-1"
+aws_id="460840353653"
 cd terraform 
 app_img=$(terraform output -raw ecr_app_repository_name) 
 db_img=$(terraform output -raw ecr_db_repository_name)
@@ -51,7 +51,7 @@ docker build -f k8s/Dockerfile.mysql -t $db_image_name k8s
 
 # ECR Login
 echo "--------------------Login to ECR--------------------"
-aws ecr get-login-password --region $region | docker login --username AWS --password-stdin $aws_id.dkr.ecr.eu-central-1.amazonaws.com
+aws ecr get-login-password --region $region | docker login --username AWS --password-stdin $aws_id.dkr.ecr.us-east-1.amazonaws.com
 
 # push the latest build to dockerhub
 echo "--------------------Pushing Docker Image--------------------"
